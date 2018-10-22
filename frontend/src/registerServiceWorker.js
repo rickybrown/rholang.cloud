@@ -1,12 +1,14 @@
+const fetch = require('node-fetch')
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    window.location.hostname === '[::1]' ||
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  window.location.hostname === '[::1]' ||
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 )
 
-export default function register () {
+export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location)
     if (publicUrl.origin !== window.location.origin) {
@@ -28,7 +30,7 @@ export default function register () {
   }
 }
 
-function registerValidSW (swUrl) {
+function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -50,7 +52,7 @@ function registerValidSW (swUrl) {
     })
 }
 
-function checkValidServiceWorker (swUrl) {
+function checkValidServiceWorker(swUrl) {
   fetch(swUrl)
     .then(response => {
       if (
@@ -71,7 +73,7 @@ function checkValidServiceWorker (swUrl) {
     })
 }
 
-export function unregister () {
+export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister()

@@ -13,6 +13,7 @@ const FileReader = require('./lib/FileReader')
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 // Ensure /tmp/rnode exists
 try {
@@ -91,17 +92,16 @@ app.get('/health', function (req, res) {
 
 var exec = require('child_process').exec, child;
 
-app.post("/server/eval", function (req, res) {
-    res.send("Just test")
+app.post("/server/eval", function (request, response) {
+    console.log("Request data: " + request.body)
+    setTimeout(
+        DockerManager.runWithInputWithoutSocket(request.body.value)
+        , 10000);
+    response.send("Just test")
 })
 
 app.post("/error",  function (req, res) {
     throw new Error("Error!");
-})
-
-app.post("/test5",  function (req, res) {
-    setTimeout('', 5000);
-    res.send("After 5 seconds")
 })
 
 function errorHandler (err, req, res, next) {

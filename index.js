@@ -91,15 +91,26 @@ app.get('/health', function (req, res) {
 
 var exec = require('child_process').exec, child;
 
-app.post("/test", async (req, res) => {
-  let content = child();
-
-  for (let line of stdout.split('\n')) {
-    console.log(`ls: ${line}`);
-  }
-
-  res.send(content)
+app.post("/server/eval", function (req, res) {
+    res.send("Just test")
 })
+
+app.post("/error",  function (req, res) {
+    throw new Error("Error!");
+})
+
+app.post("/test5",  function (req, res) {
+    setTimeout('', 5000);
+    res.send("After 5 seconds")
+})
+
+function errorHandler (err, req, res, next) {
+    if (res.headersSent) {
+        return next(err)
+    }
+    res.status(500)
+    res.render('error', { error: err })
+}
 
  child = exec('docker exec -it goofy_albattani /bin/bash -c \'echo $PWD\'' , function (error, stdout, stderr) {
    console.log('stdout: ' + stdout);

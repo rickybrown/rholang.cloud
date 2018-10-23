@@ -89,6 +89,27 @@ app.get('/health', function (req, res) {
   })
 })
 
+var exec = require('child_process').exec, child;
+
+app.post("/test", async (req, res) => {
+  let content = child();
+
+  for (let line of stdout.split('\n')) {
+    console.log(`ls: ${line}`);
+  }
+
+  res.send(content)
+})
+
+ child = exec('docker exec -it goofy_albattani /bin/bash -c \'echo $PWD\'' , function (error, stdout, stderr) {
+   console.log('stdout: ' + stdout);
+   console.log('stderr: ' + stderr);
+   if (error !== null) {
+     console.log('exec error: ' + error);
+   }
+ });
+
+
 // Socket.io logic
 io.on('connection', function (socket) {
   console.log('a user connected')

@@ -17,3 +17,7 @@ deploy-ips.txt
 
 /logs
 /indices
+
+npm-debug.log
+
+frontend/yarn.lock

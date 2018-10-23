@@ -1979,10 +1979,12 @@ code-point-at@^1.0.0:
 codemirror-rholang@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/codemirror-rholang/-/codemirror-rholang-1.0.1.tgz#073462dcd7cdbb3203a32c8a02396dfeafce8059"
+  integrity sha512-BHo8DfbFRVAtP2aFAHTt67QATGNl9zOIJmtr4CfcmRSp6GSIeeVzkKnssJx//6WNBxKvfG74RA8ucEL/ulzMgQ==
 
 codemirror@^5.40.2:
   version "5.40.2"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.40.2.tgz#f4a41fee2d84e679543591b3680af259d903330b"
+  integrity sha512-yoWuvEiD3v5vTwdoMc/wu/Ld6dh9K/yEiEBTKOPGM+/pN0gTAqFNtrLHv1IJ1UJvzFpNRvMi92XCi3+8/iIaEw==
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -3222,6 +3224,7 @@ event-emitter@~0.3.5:
 eventemitter3@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
+  integrity sha1-teEHm1n7XhuidxwKmTvgYKWMmbo=
 
 eventemitter3@^3.0.0:
   version "3.1.0"
@@ -7085,6 +7088,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
 react-codemirror2@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-5.1.0.tgz#62de4460178adea40eb52eabf7491669bf3794b8"
+  integrity sha512-Cksbgbviuf2mJfMyrKmcu7ycK6zX/ukuQO8dvRZdFWqATf5joalhjFc6etnBdGCcPA2LbhIwz+OPnQxLN/j1Fw==
 
 react-dev-utils@^5.0.2:
   version "5.0.2"
@@ -7161,6 +7165,7 @@ react-modal@^3.6.1:
 react-redux-toastr@^7.4.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.4.0.tgz#3bf6d321cbafe4bf6721f1917460c7ced8b59f12"
+  integrity sha512-NmSSvTt9k3pwc5+bwdzy79mYQIJzNllc9NtA1B9teWdXB2mMQVwjhVL/+zWvSyPPotSsg3soqTz/sdItUEYsYw==
   dependencies:
     classnames "^2.2.3"
     eventemitter3 "^2.0.3"

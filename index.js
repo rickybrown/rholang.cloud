@@ -12,17 +12,17 @@ const FileReader = require('./lib/FileReader')
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Ensure /tmp/rnode exists
 try {
   fs.mkdirSync('/tmp/rnode')
-} catch (e) {}
+} catch (e) { }
 try {
   fs.unlinkSync('/tmp/rnode/rspace/data.mdb')
   fs.unlinkSync('/tmp/rnode/rspace/lock.mdb')
-} catch (e) {}
+} catch (e) { }
 
 // Start running container
 DockerManager.startContainers('rchain/rnode')
@@ -36,11 +36,11 @@ const files = FileReader.readFiles()
 const queue = new (require('better-queue'))(function (input, cb) {
   console.log('running queue', input.data)
   DockerManager.runWithInput(input, cb)
-}, {maxTimeout: 100000})
+}, { maxTimeout: 100000 })
 
 // HTTP Routes
 app.get('/', function (req, res) {
-  const config = {autorun: false, version: 'latest'}
+  const config = { autorun: false, version: 'latest' }
   const content = indexHTML
     .replace('{{ content }}', example)
     .replace('{{ config }}', JSON.stringify(config))
@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', function (req, res) {
-  const config = {autorun: true, version: 'latest'}
+  const config = { autorun: true, version: 'latest' }
   const content = indexHTML
     .replace('{{ content }}', req.body.content || req.body.body || example)
     .replace('{{ config }}', JSON.stringify(config))
@@ -105,30 +105,40 @@ app.get('/health', function (req, res) {
 var exec = require('child_process').exec, child;
 
 app.post("/server/eval", function (request, response) {
-    console.log("Request data: " + request.body.code)
-    let result = DockerManager.runWithInputWithoutSocket(request.body.code).then()
-    response.send(result.)
+  console.log("Request data: " + request.body)
+  DockerManager.runWithInputWithoutSocket(request.body, response)
+    .then((data) => {
+      returnObj = {}
+      //console.log(data)
+      let evalSplit = data.split('Evaluating:')[1]
+      returnObj.evaluating = evalSplit.split('\n}')[0] + '\n}'
+      returnObj.output = evalSplit.split('\n}')[1].split('Result for')[0].split('\u0001\u0000')[0].trim()
+      returnObj.storageContents = data.split('Storage Contents:')[1].split('\u0001\u0000')[0].trim()
+      console.log(returnObj)
+      response.setHeader('Content-Type', 'application/json')
+      response.send(JSON.stringify(returnObj))
+    })
 })
 
-app.post("/error",  function (req, res) {
-    throw new Error("Error!");
+app.post("/error", function (req, res) {
+  throw new Error("Error!");
 })
 
-function errorHandler (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err)
-    }
-    res.status(500)
-    res.render('error', { error: err })
+function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(500)
+  res.render('error', { error: err })
 }
 
- child = exec('docker exec -it goofy_albattani /bin/bash -c \'echo $PWD\'' , function (error, stdout, stderr) {
-   console.log('stdout: ' + stdout);
-   console.log('stderr: ' + stderr);
-   if (error !== null) {
-     console.log('exec error: ' + error);
-   }
- });
+child = exec('docker exec -it goofy_albattani /bin/bash -c \'echo $PWD\'', function (error, stdout, stderr) {
+  console.log('stdout: ' + stdout);
+  console.log('stderr: ' + stderr);
+  if (error !== null) {
+    console.log('exec error: ' + error);
+  }
+});
 
 
 // Socket.io logic

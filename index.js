@@ -36,7 +36,7 @@ const files = FileReader.readFiles()
 const queue = new (require('better-queue'))(function (input, cb) {
   console.log('running queue', input.data)
   DockerManager.runWithInput(input, cb)
-}, {maxTimeout: 10000})
+}, {maxTimeout: 100000})
 
 // HTTP Routes
 app.get('/', function (req, res) {
@@ -105,11 +105,9 @@ app.get('/health', function (req, res) {
 var exec = require('child_process').exec, child;
 
 app.post("/server/eval", function (request, response) {
-    console.log("Request data: " + request.body)
-    setTimeout(
-        DockerManager.runWithInputWithoutSocket(request.body.value)
-        , 10000);
-    response.send("Just test")
+    console.log("Request data: " + request.body.code)
+    let result = DockerManager.runWithInputWithoutSocket(request.body.code).then()
+    response.send(result.)
 })
 
 app.post("/error",  function (req, res) {

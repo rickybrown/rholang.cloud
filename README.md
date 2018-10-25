@@ -13,13 +13,13 @@ Just want to play around with Rholang? Simply go to [rholang.cloud](http://rhola
 If you want to help develop rholang.cloud, or run your own instance, follow these instructions:
 
 1. Ensure [Docker](https://www.docker.com/) and [Node.JS](https://nodejs.org) (version 8 or above) are installed on your machine.
-2. Clone the Github repo to your desired location using `git clone https://github.com/th3build/rholang.cloud`.
+2. Clone the Github repo to your desired location using `git clone https://github.com/rickybrown/rholang.cloud`.
 3. Install NPM dependencies: `npm install`
 4. Run it: `PORT=8080 npm start`
 
 
 ## Development
-There's always [stuff](https://github.com/th3build/rholang.cloud/issues) that you can help develop.
+There's always [stuff](https://github.com/rickybrown/rholang.cloud/issues) that you can help develop.
 
 Mayor features that are planned:
 
